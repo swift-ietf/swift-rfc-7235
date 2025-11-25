@@ -1,0 +1,13 @@
+# RFC Definitions File
+# Format: RFC_NUMBER:RFC_TITLE:DEPENDENCIES (comma-separated)
+# Dependencies should be RFC numbers only (e.g., 1035, not RFC 1035)
+
+# Independent RFCs (no dependencies)
+1035:Domain Names Implementation and Specification:
+2822:Internet Message Format:
+
+# RFCs with dependencies
+1123:Requirements for Internet Hosts Application and Support:1035
+5321:Simple Mail Transfer Protocol:1123
+5322:Internet Message Format:1123,5321
+6531:SMTP Extension for Internationalized Email:1123,5321,5322
