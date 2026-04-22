@@ -2,32 +2,37 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  test:
-    runs-on: macos-latest
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Swift
-      uses: swift-actions/setup-swift@v2
-      with:
-        swift-version: "6.0"
-    
-    - name: Build
-      run: swift build
-    
-    - name: Run tests
-      run: swift test
-    
-    - name: Check Swift format
-      run: |
-        if command -v swiftformat >/dev/null 2>&1; then
-          swiftformat --lint .
-        else
-          echo "swiftformat not installed, skipping format check"
-        fi
+  # Build + test matrix — see swift-institute/.github/.github/workflows/swift-ci.yml
+  ci:
+    uses: swift-institute/.github/.github/workflows/swift-ci.yml@v1
+    with:
+      cache-key-prefix: swift63-spm-v1
+      enable-private-repos: true
+    secrets:
+      PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+
+  # DocC umbrella-catalog pipeline per [DOC-019a] — see
+  # swift-institute/.github/.github/workflows/swift-docs.yml
+  docs:
+    uses: swift-institute/.github/.github/workflows/swift-docs.yml@v1
+    with:
+      umbrella-module: RFC_7235
+      umbrella-display-name: "RFC_7235"
+      umbrella-bundle-id: "swift-rfc-7235.RFC_7235"
+      umbrella-docc-path: "Sources/RFC_7235/RFC_7235.docc"
+      exclude-modules: ""
+      enable-private-repos: true
+    secrets:
+      PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
