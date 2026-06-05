@@ -1,24 +1,4 @@
-disabled_rules:
-  - trailing_whitespace
-  - line_length
+# SwiftLint configuration for swift-rfc-7235
+# Inherits from the shared parent configuration in swift-standards
 
-opt_in_rules:
-  - empty_count
-  - file_header
-
-included:
-  - Sources
-  - Tests
-
-excluded:
-  - .build
-  - .swiftpm
-
-file_header:
-  required_pattern: |
-                    \/\/
-                    \/\/  .*\.swift
-                    \/\/  swift-rfc-.*
-                    \/\/
-                    \/\/  Created by .* on .*\.
-                    \/\/
+parent_config: https://raw.githubusercontent.com/swift-standards/swift-standards/main/.swiftlint.yml
