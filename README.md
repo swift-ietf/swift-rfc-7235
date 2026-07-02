@@ -10,7 +10,7 @@ Add this to your Package.swift:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-web-standards/swift-rfc-7235.git", branch: "main")
+    .package(url: "https://github.com/swift-ietf/swift-rfc-7235.git", branch: "main")
 ]
 ```
 
