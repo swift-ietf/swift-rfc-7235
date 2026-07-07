@@ -6,6 +6,6 @@
 //
 
 /// Implementation of RFC 7235: Hypertext Transfer Protocol (HTTP/1.1): Authentication
-/// 
+///
 /// See: https://www.rfc-editor.org/rfc/rfc7235.html
 public enum RFC_7235 {}
